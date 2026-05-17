@@ -41,8 +41,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", res.data.token);
       }
 
-      setLoading(false);
-      return { success: true, user: res.data.user };
+      return {
+        success: true,
+        user: res.data.user,
+      };
     } catch (err) {
       console.error(
         "REGISTER ERROR:",
@@ -51,12 +53,13 @@ export const AuthProvider = ({ children }) => {
       );
 
       setError(err.response?.data?.message || "Signup failed");
-      setLoading(false);
 
       return {
         success: false,
         error: err.response?.data,
       };
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -78,8 +81,10 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("token", res.data.token);
       }
 
-      setLoading(false);
-      return { success: true, user: res.data.user };
+      return {
+        success: true,
+        user: res.data.user,
+      };
     } catch (err) {
       console.error(
         "LOGIN ERROR:",
@@ -88,12 +93,13 @@ export const AuthProvider = ({ children }) => {
       );
 
       setError(err.response?.data?.message || "Login failed");
-      setLoading(false);
 
       return {
         success: false,
         error: err.response?.data,
       };
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -123,8 +129,6 @@ export const AuthProvider = ({ children }) => {
       setUser(res.data.user);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      setLoading(false);
-
       return {
         success: true,
         user: res.data.user,
@@ -137,12 +141,13 @@ export const AuthProvider = ({ children }) => {
       );
 
       setError(err.response?.data?.message || "Profile update failed");
-      setLoading(false);
 
       return {
         success: false,
         error: err.response?.data,
       };
+    } finally {
+      setLoading(false);
     }
   };
 
